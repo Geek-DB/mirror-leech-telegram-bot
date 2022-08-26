@@ -1,21 +1,28 @@
+from bot import DOWNLOAD_DIR
 from bot.helper.ext_utils.bot_utils import MirrorStatus, get_readable_file_size, get_readable_time
+from bot.helper.ext_utils.fs_utils import get_path_size
 
-
-class GdDownloadStatus:
-    def __init__(self, obj, size, listener, gid):
+class YtDlpDownloadStatus:
+    def __init__(self, obj, listener, gid):
         self.__obj = obj
-        self.__size = size
+        self.__uid = listener.uid
         self.__gid = gid
         self.message = listener.message
 
+    def gid(self):
+        return self.__gid
+
     def processed_bytes(self):
-        return self.__obj.processed_bytes
+        if self.__obj.downloaded_bytes != 0:
+          return self.__obj.downloaded_bytes
+        else:
+          return get_path_size(f"{DOWNLOAD_DIR}{self.__uid}")
 
     def size_raw(self):
-        return self.__size
+        return self.__obj.size
 
     def size(self):
-        return get_readable_file_size(self.__size)
+        return get_readable_file_size(self.size_raw())
 
     def status(self):
         return MirrorStatus.STATUS_DOWNLOADING
@@ -23,14 +30,8 @@ class GdDownloadStatus:
     def name(self):
         return self.__obj.name
 
-    def gid(self) -> str:
-        return self.__gid
-
     def progress_raw(self):
-        try:
-            return self.__obj.processed_bytes / self.__size * 100
-        except:
-            return 0
+        return self.__obj.progress
 
     def progress(self):
         return f'{round(self.progress_raw(), 2)}%'
@@ -39,14 +40,16 @@ class GdDownloadStatus:
         """
         :return: Download speed in Bytes/Seconds
         """
-        return self.__obj.speed()
+        return self.__obj.download_speed
 
     def speed(self):
         return f'{get_readable_file_size(self.speed_raw())}/s'
 
     def eta(self):
+        if self.__obj.eta != '-':
+            return f'{get_readable_time(self.__obj.eta)}'
         try:
-            seconds = (self.__size - self.__obj.processed_bytes) / self.speed_raw()
+            seconds = (self.size_raw() - self.processed_bytes()) / self.speed_raw()
             return f'{get_readable_time(seconds)}'
         except:
             return '-'
