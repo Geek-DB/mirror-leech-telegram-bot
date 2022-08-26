@@ -27,7 +27,7 @@ class _BotCommands:
         self.CancelAllCommand = f'cancelall{CMD_INDEX}'
         self.ListCommand = f'list{CMD_INDEX}'
         self.SearchCommand = f'search{CMD_INDEX}'
-        self.StatusCommand = f'status{CMD_INDEX}'
+        self.StatusCommand = f'status'
         self.AuthorizedUsersCommand = f'users{CMD_INDEX}'
         self.AuthorizeCommand = f'authorize{CMD_INDEX}'
         self.UnAuthorizeCommand = f'unauthorize{CMD_INDEX}'
@@ -35,7 +35,7 @@ class _BotCommands:
         self.RmSudoCommand = f'rmsudo{CMD_INDEX}'
         self.PingCommand = f'ping{CMD_INDEX}'
         self.RestartCommand = f'restart{CMD_INDEX}'
-        self.StatsCommand = f'stats{CMD_INDEX}'
+        self.StatsCommand = f'stats'
         self.HelpCommand = f'help{CMD_INDEX}'
         self.LogCommand = f'log{CMD_INDEX}'
         self.ShellCommand = f'shell{CMD_INDEX}'
@@ -45,11 +45,11 @@ class _BotCommands:
         self.LeechSetCommand = f'leechset{CMD_INDEX}'
         self.SetThumbCommand = f'setthumb{CMD_INDEX}'
         self.BtSelectCommand = f'btsel{CMD_INDEX}'
-        self.RssListCommand = (f'rsslist{CMD_INDEX}', f'rl{CMD_INDEX}')
-        self.RssGetCommand = (f'rssget{CMD_INDEX}', f'rg{CMD_INDEX}')
-        self.RssSubCommand = (f'rsssub{CMD_INDEX}', f'rs{CMD_INDEX}')
-        self.RssUnSubCommand = (f'rssunsub{CMD_INDEX}', f'rus{CMD_INDEX}')
-        self.RssSettingsCommand = (f'rssset{CMD_INDEX}', f'rst{CMD_INDEX}')
+        self.RssListCommand = (f'rsslist{CMD_INDEX}', f'list')
+        self.RssGetCommand = (f'rssget{CMD_INDEX}', f'get')
+        self.RssSubCommand = (f'rsssub{CMD_INDEX}', f'sub')
+        self.RssUnSubCommand = (f'rssunsub{CMD_INDEX}', f'unsub')
+        self.RssSettingsCommand = (f'rssset{CMD_INDEX}', f'set')
         self.SleepCommand = f'sleep{CMD_INDEX}'
 
 BotCommands = _BotCommands()
